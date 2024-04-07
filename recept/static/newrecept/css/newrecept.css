@@ -49,6 +49,12 @@ h1 {
     border-radius: 10px;
     padding: 2%;
 }
+
+.list {
+    width: 100%;
+    height: auto;
+}
+
 .direction {
     margin-top: 20%;
     display: flex;
@@ -145,4 +151,8 @@ i {
     color: #f8f6f6;
     font-size: 1.5em;
     margin-left: 10%;
+}
+
+a {
+    margin-top: 2%;
 }

@@ -21,7 +21,8 @@
         {% if data %}
             {% for el in data %}
                 <div class="recept-list">
-                    {{ el.ingredient_name }}
+                    {{ el }}
+                    <a id="button-recept-content" href="{% url 'dish' el.pk %}" class="btn btn-warning">Просмотреть</a>
                 </div>
             {% endfor %}
         {% else %}

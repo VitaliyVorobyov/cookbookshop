@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, DetailView
 from .models import DishModel, ReceptModel
 from .forms import DishForm, ReceptForm
 
@@ -10,7 +10,7 @@ def index(request):
 
 
 def recepts(request):
-    data = ReceptModel.objects.all()
+    data = DishModel.objects.all()
     return render(request, 'recept/recepts.html', {'data': data})
 
 
@@ -18,16 +18,20 @@ def newdish(request):
     return render(request, 'recept/new-dish.html')
 
 
-class ReceptView(DeleteView):
-    model = ReceptModel
-    template_name = 'recept/view-recept.html'
-    success_url = '/'
-
-
-class DishView(DeleteView):
+class DishView(DetailView):
     model = DishModel
-    template_name = 'recept/new-dish.html'
-    success_url = '/'
+    template_name = 'recept/view-recept.html'
+    context_object_name = 'dish'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        dish = self.get_object()
+        ingredints = ReceptModel.objects.filter(dish=dish)
+
+        context['dish'] = dish
+        context['ingredints'] = ingredints
+
+        return context
 
 
 def new_dish(request):
