@@ -1,0 +1,16 @@
+{% extends 'recept/loyout.html'%}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block header %}<h1>Выбор раздела</h1>{% endblock %}
+
+{% block content %}
+    <div class="direction">
+        <div id="1" class="box one">
+             <a id="button" href="{% url 'recepts' %}" class="btn btn-warning">Книга рецептов</a>
+        </div>
+        <div class="box two" >
+            <a id="button" href="{% url 'newdish' %}" class="btn btn-warning">Магазин</a>
+        </div>
+    </div>
+{% endblock %}

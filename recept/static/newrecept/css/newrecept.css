@@ -1,0 +1,148 @@
+body {
+    background: #625f5f;
+    max-font-size: 100%;
+}
+
+header {
+    width: 100%;
+    height: auto;
+    float: right;
+    position: fixed;
+    border-bottom: #96969a 2px solid;
+}
+
+h1 {
+    color: #f8f6f6;
+    text-align: center;
+}
+
+.active, .aside-content {
+    background: #181717;
+    color: #ffffff;
+    float: left;
+    width: 20%;
+    padding-top: 1%;
+    border-right: #96969a 2px solid;
+}
+
+.aside-content{
+    height: 100vh;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.recept-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    background: white;
+    height: auto;
+    margin-bottom: 3%;
+    border-radius: 10px;
+    padding: 2%;
+}
+.direction {
+    margin-top: 20%;
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+.box {
+    text-align: center;
+    width: 40vh;
+    height: 40vh;
+    border-radius: 10px;
+    border: #96969a 1px solid;
+    box-shadow: #313133 3px 3px 3px;
+}
+
+.one {
+    background-image: url('../img/telegram-cloud-photo-size-2-5224209124785511717-y.jpg');
+}
+
+.two {
+    background-image: url('../img/telegram-cloud-photo-size-2-5224209124785511737-y.jpg');
+}
+
+.one, .two {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.wrapper{
+    min-height: 100vh;
+}
+
+.content {
+    float: right;
+    width: 100%;
+}
+
+
+footer {
+    color: #ffffff;
+    clear: both;
+    text-align: center;
+    padding: 1%;
+    width: 100%;
+    float: right;
+    border-top: #96969a 2px solid;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3%;
+}
+
+form {
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#button {
+    margin-top: 75%;
+    width: 50%;
+}
+
+#btn_add {
+   margin-top: 2%;
+}
+
+#button-recept {
+    margin-top: 30%;
+    margin-left: 20%;
+}
+
+i, a, .btn {
+    transition: transform 0.5s;
+}
+
+a:hover, i:hover, .btn:hover {
+    transform: scale(1.1);
+    color: gray;
+}
+
+a:active, i:active, .btn:active {
+    transform: scale(0.9);
+}
+
+
+i {
+    color: #f8f6f6;
+    font-size: 1.5em;
+    margin-left: 10%;
+}

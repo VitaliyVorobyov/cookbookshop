@@ -1,0 +1,23 @@
+{% extends 'recept/loyout.html' %}
+
+{% block header %}
+    <div class="active">
+        <ul>
+            <a href="{% url 'index' %}"><link><i class="fas fa-home"> Главная</i></a><br>
+        </ul>
+    </div>
+    <h1>Рецепты</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="aside-content">
+        <a id="button-recept" href="{% url 'newdish' %}" class="btn btn-warning">Новый рецепт</a>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form">
+            {{ form.dish_name }}
+        </div>
+        <button id="btn_add" class="btn btn-success" type="submit">Сохранить</button>
+    </form>
+{% endblock %}

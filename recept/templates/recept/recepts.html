@@ -1,0 +1,34 @@
+{% extends 'recept/loyout.html' %}
+
+{% block title %}
+    Рецепты
+{% endblock %}
+
+{% block header %}
+    <div class="active">
+        <ul>
+            <a href="{% url 'index' %}"><link><i class="fas fa-home"> Главная</i></a><br>
+        </ul>
+    </div>
+    <h1>Рецепты</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="aside-content">
+        <a id="button-recept" href="{% url 'newdish' %}" class="btn btn-warning">Новый рецепт</a>
+    </div>
+    <div class="main">
+        {% if data %}
+            {% for el in data %}
+                <div class="recept-list">
+                    {{ el.ingredient_name }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="recept-list">
+                <h3>У вас еще не добавлено ни одного рецепта</h3>
+                <a id="button-recept-content" href="{% url 'newdish' %}" class="btn btn-warning">Новый рецепт</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'recept/loyout.html' %}
+{% block title %}Новый ингредиент{% endblock %}
+{% block content %}
+    <div class="info">
+
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form">
+            {{ form.ingredient_name }}
+            {{ form.count }}
+            {{ form.measure }}
+        </div>
+        <button id="btn_add" class="btn btn-success" type="submit">Добавить ингредиент</button>
+    </form>
+{% endblock %}
