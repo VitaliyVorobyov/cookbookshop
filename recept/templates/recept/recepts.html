@@ -18,13 +18,21 @@
         <a id="button-recept" href="{% url 'newdish' %}" class="btn btn-warning">Новый рецепт</a>
     </div>
     <div class="main">
-        {% if data %}
-            {% for el in data %}
+        {% if page %}
+            {% for el in page %}
                 <div class="recept-list">
                     {{ el }}
                     <a id="button-recept-content" href="{% url 'dish' el.pk %}" class="btn btn-warning">Просмотреть</a>
                 </div>
             {% endfor %}
+            <div class="next-last">
+                    {% if page.has_previous %}
+                        <a id="button-recept-content" href="?page={{ page.previous_page_number }}" class="btn btn-warning">Назад</a>
+                    {% endif %}
+                    {% if page.has_next %}
+                        <a id="button-recept-content" href="?page={{ page.next_page_number }}" class="btn btn-warning">Далее</a>
+                    {% endif %}
+            </div>
         {% else %}
             <div class="recept-list">
                 <h3>У вас еще не добавлено ни одного рецепта</h3>
