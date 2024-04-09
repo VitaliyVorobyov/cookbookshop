@@ -18,13 +18,13 @@
         <a id="button-recept" href="{% url 'newdish' %}" class="btn btn-warning">Новый рецепт</a>
     </div>
     <div class="main">
-        {% if ingredints %}
+        {% if ingredients %}
             <div class="recept-list">
                 <h5>Состав:</h5>
                 <div class="list">
                     <ul>
-                        {% for el in ingredints %}
-                            <li>{{ el.ingredient_name }} - {{ el.count }}{{ el.measure }}.</li>
+                        {% for el in ingredients %}
+                            <li>{{ el.ingredient_name }} - {{ el.count }}{{ el.measure }}</li>
                         {% endfor %}
                     </ul>
                 </div>

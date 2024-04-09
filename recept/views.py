@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 from django.core.paginator import Paginator
+from django.db.models import F, FloatField, ExpressionWrapper
+
 from .models import DishModel, ReceptModel
 from .forms import DishForm, ReceptForm
 
@@ -13,7 +15,7 @@ def index(request):
 def recepts(request):
     page_number = int(request.GET.get('page', 1))
     data = DishModel.objects.all()
-    paginator = Paginator(data, 2)
+    paginator = Paginator(data, 5)
     page = paginator.get_page(page_number)
     context = {
         'page': page
@@ -33,10 +35,20 @@ class DishView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         dish = self.get_object()
-        ingredints = ReceptModel.objects.filter(dish=dish)
+        ingredients = ReceptModel.objects.filter(dish=dish)
+        per = self.request.GET.get('per', '')
+
+        if per:
+            try:
+                per = int(per)
+                for ingredient in ingredients:
+                    ingredient.count *= per
+            except ValueError:
+                pass
 
         context['dish'] = dish
-        context['ingredints'] = ingredints
+        context['ingredients'] = ingredients
+        context['per'] = per
 
         return context
 
