@@ -20,6 +20,13 @@
     <div class="main">
         {% if ingredients %}
             <div class="recept-list">
+                <form class="count-per" method="get">
+                    <label for="per"><b>Выберите количество порций:</b></label>
+                    <input class="form-control" type="number" id="per" name="per">
+                    <button class="btn btn-success" type="submit">Расчитать</button>
+                </form>
+            </div>
+            <div class="recept-list">
                 <h5>Состав:</h5>
                 <div class="list">
                     <ul>

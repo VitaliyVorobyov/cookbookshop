@@ -116,17 +116,26 @@ footer {
 }
 
 .form {
+    padding-top: 10%;
     display: flex;
     flex-direction: row;
     margin-top: 3%;
 }
 
 form {
-    padding-top: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.count-per {
+    flex-direction: row;
+    gap: 5%;
+}
+
+#per {
+    width: 10%;
 }
 
 #button {

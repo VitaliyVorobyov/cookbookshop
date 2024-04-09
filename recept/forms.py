@@ -21,12 +21,6 @@ class ReceptForm(ModelForm):
         model = ReceptModel
         fields = ['ingredient_name', 'count', 'measure']
 
-        # labels = {
-        #     'ingredient_name': '',
-        #     'count': '',
-        #     'measure': '',
-        # }
-
         widgets = {
             'ingredient_name': TextInput(attrs={'id': 'ingredient_name', 'class': 'form-control', 'placeholder': 'Ингредиент'}),
             'count': NumberInput(attrs={'id': 'count', 'class': 'form-control', 'placeholder': 'Количество'}),
