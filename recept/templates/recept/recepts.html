@@ -26,11 +26,12 @@
                 </div>
             {% endfor %}
             <div class="next-last">
-                    {% if page.has_previous %}
-                        <a id="button-recept-content" href="?page={{ page.previous_page_number }}" class="btn btn-warning">Назад</a>
+                    {% if page_obj.has_previous %}
+                        <a id="button-recept-content" href="?page={{ page_obj.previous_page_number }}" class="btn btn-warning">Назад</a>
                     {% endif %}
-                    {% if page.has_next %}
-                        <a id="button-recept-content" href="?page={{ page.next_page_number }}" class="btn btn-warning">Далее</a>
+                    <b>{{ page_obj.number }}</b>
+                    {% if page_obj.has_next %}
+                        <a id="button-recept-content" href="?page={{ page_obj.next_page_number }}" class="btn btn-warning">Далее</a>
                     {% endif %}
             </div>
         {% else %}

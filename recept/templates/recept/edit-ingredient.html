@@ -1,0 +1,18 @@
+{% extends 'recept/loyout.html' %}
+{% block title %}Изменить{% endblock %}
+
+{% block header %}
+    <h1>{{ receptmodel.dish }}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form">
+            {{ form.ingredient_name }}
+            {{ form.count }}
+            {{ form.measure }}
+        </div>
+        <button id="btn_add" class="btn btn-success" type="submit">Изменить ингредиент</button>
+    </form>
+{% endblock %}

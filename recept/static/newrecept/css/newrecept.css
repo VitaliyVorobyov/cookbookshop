@@ -27,7 +27,7 @@ h1 {
 
 .aside-content{
     min-height: 100vh;
-    height: 100cap;
+    height: 100%;
 }
 
 .main {
@@ -35,7 +35,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .recept-list, .next-last {
@@ -46,9 +46,13 @@ h1 {
     width: 60%;
     background: white;
     height: auto;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
     border-radius: 10px;
     padding: 2%;
+}
+
+#form-count {
+    background: #625f5f;
 }
 
 .next-last {
@@ -132,6 +136,7 @@ form {
 .count-per {
     flex-direction: row;
     gap: 5%;
+    font-size: 1.5em;
 }
 
 #per {
@@ -174,4 +179,10 @@ i {
 
 a {
     margin-top: 2%;
+}
+
+.delete {
+    text-align: center;
+    color: white;
+    margin-top: 10%;
 }

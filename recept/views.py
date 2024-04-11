@@ -1,41 +1,43 @@
-from django.shortcuts import render, redirect
-from django.views.generic import DetailView
-from django.core.paginator import Paginator
-from django.db.models import F, FloatField, ExpressionWrapper
+from django.shortcuts import render
+from django.views.generic import DetailView, View, ListView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormMixin
 
 from .models import DishModel, ReceptModel
 from .forms import DishForm, ReceptForm
 
 
-# Create your views here.
-def index(request):
-    return render(request, 'recept/index.html')
+class IndexView(View):
+    template_name = 'recept/index.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
 
 
-def recepts(request):
-    page_number = int(request.GET.get('page', 1))
-    data = DishModel.objects.all()
-    paginator = Paginator(data, 5)
-    page = paginator.get_page(page_number)
-    context = {
-        'page': page
-    }
-    return render(request, 'recept/recepts.html', context)
-
-
-def newdish(request):
-    return render(request, 'recept/new-dish.html')
-
-
-class DishView(DetailView):
+class ReceptsView(ListView):
     model = DishModel
+    template_name = 'recept/recepts.html'
+    context_object_name = 'page'
+    paginate_by = 4
+    ordering = ['dish_name']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class DishView(FormMixin, DetailView):
+    model = DishModel
+    form_class = ReceptForm
     template_name = 'recept/view-recept.html'
     context_object_name = 'dish'
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         dish = self.get_object()
-        ingredients = ReceptModel.objects.filter(dish=dish)
+        ingredients = ReceptModel.objects.filter(dish=dish).order_by('ingredient_name')
         per = self.request.GET.get('per', '')
 
         if per:
@@ -49,46 +51,53 @@ class DishView(DetailView):
         context['dish'] = dish
         context['ingredients'] = ingredients
         context['per'] = per
-
         return context
 
-
-def new_dish(request):
-    errors = ''
-    if request.method == 'POST':
-        form = DishForm(request.POST)
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
         if form.is_valid():
-            form.save()
-            return redirect('new_ingredient', form.instance.pk)
+            return self.form_valid(form)
         else:
-            errors = 'Форма заполнена неверно'
+            return self.form_invalid(form)
 
-    form = DishForm()
-
-    data = {
-        'form': form,
-        'errors': errors
-    }
-
-    return render(request, 'recept/new-dish.html', data)
+    def form_valid(self, form):
+        pk = self.kwargs.get('pk')
+        form.instance.dish = DishModel.objects.get(pk=int(pk))
+        form.save()
+        return super().form_valid(form)
 
 
-def new_ingredient(request, pk):
-    errors = ''
-    if request.method == 'POST':
-        form = ReceptForm(request.POST)
-        if form.is_valid():
-            form.instance.dish = DishModel.objects.get(pk=int(pk))
-            form.save()
-            return redirect('new_ingredient', pk)
-        else:
-            errors = 'Форма заполнена неверно'
+class NewDishView(CreateView):
+    model = DishModel
+    form_class = DishForm
+    template_name = 'recept/new-dish.html'
 
-    form = ReceptForm()
+    def get_success_url(self):
+        pk = self.object.pk
+        return f'/recepts/{pk}'
 
-    data = {
-        'form': form,
-        'errors': errors
-    }
 
-    return render(request, 'recept/new-ingredient.html', data)
+class DeleteDishView(DeleteView):
+    model = DishModel
+    template_name = 'recept/delete-dish.html'
+    success_url = '/recepts/'
+
+
+class DeleteIngredientView(DeleteView):
+    model = ReceptModel
+    template_name = 'recept/delete-dish.html'
+
+    def get_success_url(self):
+        pk = self.object.dish.pk
+        return f'/recepts/{pk}'
+
+
+class UpdateDishView(UpdateView):
+    model = ReceptModel
+    form_class = ReceptForm
+    template_name = 'recept/edit-ingredient.html'
+
+    def get_success_url(self):
+        pk = self.object.dish.pk
+        return f'/recepts/{pk}'

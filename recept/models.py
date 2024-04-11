@@ -10,7 +10,7 @@ class DishModel(models.Model):
         return self.dish_name
 
     def get_absolute_url(self):
-        return f'/{self.id}'
+        return f'/recepts/{self.id}'
 
     class Meta:
         verbose_name = 'Блюдо'

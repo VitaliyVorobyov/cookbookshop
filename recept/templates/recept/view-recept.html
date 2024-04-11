@@ -19,9 +19,9 @@
     </div>
     <div class="main">
         {% if ingredients %}
-            <div class="recept-list">
+            <div id="form-count" class="recept-list">
                 <form class="count-per" method="get">
-                    <label for="per"><b>Выберите количество порций:</b></label>
+                    <label for="per">Внесите количество порций:</label>
                     <input class="form-control" type="number" id="per" name="per">
                     <button class="btn btn-success" type="submit">Расчитать</button>
                 </form>
@@ -32,6 +32,8 @@
                     <ul>
                         {% for el in ingredients %}
                             <li>{{ el.ingredient_name }} - {{ el.count }}{{ el.measure }}</li>
+                            <a href="{% url 'edit_ingredient' el.id %}" class="btn btn-success">Изменить</a>
+                            <a href="{% url 'delete_ingredient' el.pk %}" class="btn btn-danger">Удалить</a>
                         {% endfor %}
                     </ul>
                 </div>
@@ -41,5 +43,17 @@
                 <h3>У вас еще не добавлено ни одного рецепта</h3>
             </div>
         {% endif %}
+        <div id="form-count" class="recept-list">
+            <form class="count-per" method="post">
+                {% csrf_token %}
+                {{ form.ingredient_name }}
+                {{ form.count }}
+                {{ form.measure }}
+                <button class="btn btn-success" type="submit">Добавить</button>
+            </form>
+        </div>
+        <div id="form-count" class="recept-list">
+            <a href="{% url 'delete_dish' dish.id %}" class="btn btn-danger">Удалить блюдо</a>
+        </div>
     </div>
 {% endblock %}

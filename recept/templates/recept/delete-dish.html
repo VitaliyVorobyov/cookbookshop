@@ -1,0 +1,16 @@
+{% extends 'recept/loyout.html' %}
+{% block title %}Удалить{% endblock %}
+
+{% block header %}
+    <h1>234</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="delete">
+        <h4>Подтвердите удаление</h4>
+        <form method="post">
+            {% csrf_token %}
+            <button id="btn_add" class="btn btn-danger" type="submit">Удалить блюдо</button>
+        </form>
+    </div>
+{% endblock %}
